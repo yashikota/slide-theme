@@ -1,6 +1,6 @@
 ---
 theme: ./
-title: Clarity through structure
+title: Structure guides attention
 layout: cover
 info: |
   A bilingual example deck for kota-slide-1.
@@ -9,36 +9,36 @@ drawings:
   persist: false
 ---
 
-# Clarity through structure
+# Structure guides attention
 
-読みやすさを、構造からつくる。  
-Designing readability through structure.
+主張を先に見せ、視線を迷わせない。<br>
+Lead with the claim and guide attention.
 
 ::meta::
 
-Kota · Technical presentation template · 2026
+Kota · 日本語 + English · 2026
 
 ---
 layout: section
 ---
 
-# 情報を整理する四つの原則
+# 読ませる順序が、理解を決める
 
 ::section::
 
-01 / PRINCIPLES
+01 / READING FLOW
 
 ---
 layout: default
 ---
 
-# 関連する情報を近づける
+# 主張は左上から読み始める
 
-日本語とEnglishが混在しても、見出し、本文、補足の距離が関係性を示します。
+位置と余白が、情報の読む順序を伝えます。
 
-- 同じ意味の要素は近くに置く
-- 異なる話題の間には十分な余白を置く
-- 一枚につき、中心となる主張は一つに絞る
+- 主張は上に置く
+- 根拠は主張の下に置く
+- 補足は最後に置く
 
 ::label::
 
@@ -52,18 +52,12 @@ Four principles of visual design
 layout: default
 ---
 
-# 読めるコードだけを載せる
+# コードは判断に必要な行だけ見せる
 
 ```ts
-type Result<T> =
-  | { ok: true; value: T }
-  | { ok: false; reason: string }
-
-export function parse(input: string): Result<number> {
+export function parse(input: string): number | null {
   const value = Number(input)
-  return Number.isFinite(value)
-    ? { ok: true, value }
-    : { ok: false, reason: 'Not a number' }
+  return Number.isFinite(value) ? value : null
 }
 ```
 
@@ -75,7 +69,7 @@ CODE / 実装例
 layout: default
 ---
 
-# 数値は桁を揃える
+# 比較条件を揃えると差が見える
 
 | Method | Latency | Errors |
 | --- | ---: | ---: |
@@ -84,7 +78,7 @@ layout: default
 | Batched | 61 ms | 2 |
 
 <Callout type="note">
-比較では、単位と評価条件を必ず揃えます。Keep units and conditions consistent.
+単位と評価条件を揃えてから比較します。
 </Callout>
 
 ::label::
@@ -111,7 +105,7 @@ layout: two-cols
 
 ::title::
 
-# 対比は二列まで
+# 対比は同じ軸で左右に並べる
 
 ::footer::
 
@@ -121,9 +115,9 @@ CONTRAST / 対比
 layout: image-left
 ---
 
-# 図を先に読む
+# 処理の順序は図から読み取れる
 
-図と本文を分離し、説明の順序を明確にします。
+左から右へ進む図は、手順の説明に向きます。
 
 1. Client sends a request
 2. API validates the input
@@ -141,12 +135,12 @@ layout: image-left
 layout: image-right
 ---
 
-# 説明を先に読む
+# 結論を先に示すと図の意味が決まる
 
-結論から読み始める場合は、本文を左、図を右に置きます。
+本文を左に置き、判断してから図を確認します。
 
-<Callout type="warning">
-図の内容を本文で重複説明しないでください。
+<Callout type="warning" label="注意">
+図ではなく、意味を伝えます。
 </Callout>
 
 ::image::
@@ -161,36 +155,30 @@ layout: image-right
 layout: quote
 ---
 
-Design is the conscious effort to impose a meaningful order.
+秩序は、装飾ではなく理解のためにつくる。
 
 ::attribution::
 
-Victor Papanek, *Design for the Real World*
+Design principle / 設計原則
 
 ---
 layout: statement
 ---
 
-# 装飾ではなく、情報の差を見せる。
+# 色は意味の差にだけ使う。
 
 ::source::
 
-Show differences in information—not decoration.
+強調色は一色に絞る。
 
 ---
 layout: default
 ---
 
-# 一枚の上限を決める
+# 一枚は30〜60秒で伝える
 
-- 本文は40字前後の行長を目安にする
-- 箇条書きは三〜五項目に抑える
-- コードは要点だけを十数行で示す
-- 詳細は発表者ノートやリンクへ分離する
-
-<Callout type="note" label="Rule of thumb / 目安">
-読めない量は、理解できない量です。
-</Callout>
+- 本文は短い文にする
+- 箇条書きは並列関係に限る
 
 ::label::
 
@@ -200,9 +188,9 @@ WRITING / 執筆
 layout: end
 ---
 
-# Thank you.
+# 主張を上に置けば、視線は迷わない。
 
-構造が伝われば、内容に集中できる。
+短く、揃えて、意味だけを強調する。
 
 ::meta::
 

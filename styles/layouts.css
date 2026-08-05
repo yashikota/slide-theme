@@ -28,6 +28,24 @@
   grid-template-rows: auto minmax(0, 1fr) auto;
 }
 
+.layout-default {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.layout-default .layout-header,
+.layout-default .layout-footer {
+  position: absolute;
+  inset-inline: var(--space-10);
+}
+
+.layout-default .layout-header {
+  inset-block-start: var(--space-6);
+}
+
+.layout-default .layout-footer {
+  inset-block-end: var(--space-6);
+}
+
 .layout-header {
   grid-column: 1 / -1;
   display: flex;
@@ -49,8 +67,9 @@
 
 .layout-content {
   grid-column: 1 / -1;
-  align-self: center;
-  padding-block: var(--space-2);
+  grid-row: 1;
+  align-self: start;
+  padding-block: var(--space-3);
 }
 
 .layout-footer {
@@ -120,7 +139,8 @@
 
 .layout-section__content {
   grid-column: 3 / -1;
-  align-self: center;
+  align-self: start;
+  padding-block-start: var(--space-8);
 }
 
 .layout-section h1 {
@@ -136,7 +156,7 @@
 }
 
 .slidev-layout.layout-statement {
-  align-content: center;
+  align-content: start;
   grid-template-rows: auto auto;
 }
 
@@ -160,11 +180,30 @@
 
 .layout-two-cols__content {
   grid-column: 1 / -1;
+  grid-row: 1;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-6);
   align-self: center;
-  padding-block: var(--space-3);
+  padding-block: var(--space-10);
+}
+
+.layout-two-cols {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.layout-two-cols .layout-header,
+.layout-two-cols .layout-footer {
+  position: absolute;
+  inset-inline: var(--space-10);
+}
+
+.layout-two-cols .layout-header {
+  inset-block-start: var(--space-6);
+}
+
+.layout-two-cols .layout-footer {
+  inset-block-end: var(--space-6);
 }
 
 .layout-two-cols__column + .layout-two-cols__column {
@@ -174,7 +213,7 @@
 
 .layout-media {
   grid-column: 1 / -1;
-  align-items: center;
+  align-items: start;
 }
 
 .layout-image-left .layout-media__image,
@@ -201,13 +240,16 @@
 }
 
 .layout-quote {
+  align-content: start;
+  grid-template-rows: auto auto minmax(0, 1fr);
   margin: 0;
 }
 
 .slidev-layout .layout-quote__body {
   grid-column: 2 / 12;
-  align-self: end;
+  align-self: start;
   max-inline-size: none;
+  padding-block-start: var(--space-6);
   padding-inline-start: var(--space-4);
   border-inline-start: 0;
   color: var(--color-ink);
@@ -230,12 +272,10 @@
   color: var(--color-muted);
 }
 
-.layout-end {
-  align-content: center;
-}
-
 .layout-end__content {
   grid-column: 1 / 10;
+  align-self: start;
+  padding-block: var(--space-3);
 }
 
 .layout-end h1 {

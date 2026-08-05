@@ -6,7 +6,8 @@
   font-weight: 400;
   line-height: var(--leading-body);
   line-break: strict;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -40,6 +41,10 @@
 .slidev-layout :where(p, li) {
   max-inline-size: var(--measure-body);
   text-wrap: pretty;
+}
+
+.slidev-layout :where(p, li, h1, h2, h3, figcaption) {
+  hyphens: none;
 }
 
 .slidev-layout :where(ul, ol) {
