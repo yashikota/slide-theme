@@ -54,12 +54,15 @@ test('layout styles include every specialized composition', async () => {
   assert.match(css, /\.theme-figure/)
 })
 
-test('content-focused layouts repeat the current page number', async () => {
-  const names = ['image-left', 'image-right', 'quote', 'statement']
+test('every layout except the cover repeats the current page number', async () => {
+  const names = layoutNames.filter(name => name !== 'cover')
   const layouts = await Promise.all(
     names.map(name => readThemeFile(`layouts/${name}.vue`)),
   )
 
   for (const layout of layouts)
     assert.match(layout, /<SlideCurrentNo \/>/)
+
+  const cover = await readThemeFile('layouts/cover.vue')
+  assert.doesNotMatch(cover, /<SlideCurrentNo \/>/)
 })

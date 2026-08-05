@@ -8,13 +8,13 @@
   --font-sans: "Noto Sans JP Variable", "Noto Sans JP", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
-  --text-display: 4rem;
-  --text-h1: 3rem;
-  --text-h2: 2rem;
-  --text-h3: 1.5rem;
-  --text-body: 1.5rem;
-  --text-small: 1.125rem;
-  --text-caption: 1rem;
+  --text-display: 28px;
+  --text-h1: 28px;
+  --text-h2: 28px;
+  --text-h3: 24px;
+  --text-body: 24px;
+  --text-small: 18px;
+  --text-caption: 18px;
 
   --leading-tight: 1.2;
   --leading-body: 1.55;

@@ -25,6 +25,7 @@ test('package metadata defines a local Slidev theme', async () => {
 test('theme entry points exist', async () => {
   const requiredPaths = [
     '.gitignore',
+    '.github/workflows/pages.yml',
     'components',
     'layouts',
     'pnpm-workspace.yaml',
@@ -32,6 +33,16 @@ test('theme entry points exist', async () => {
   ]
 
   await Promise.all(requiredPaths.map(path => access(new URL(path, root))))
+})
+
+test('GitHub Pages workflow tests and builds the example with a repository base path', async () => {
+  const workflow = await readThemeFile('.github/workflows/pages.yml')
+
+  assert.match(workflow, /branches:\s*\n\s+- main/)
+  assert.match(workflow, /pnpm test/)
+  assert.match(workflow, /slidev build example\.md --base/)
+  assert.match(workflow, /github\.event\.repository\.name/)
+  assert.match(workflow, /actions\/deploy-pages@v4/)
 })
 
 test('only the required browser exporter may run an install script', async () => {
