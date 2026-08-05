@@ -1,0 +1,6 @@
+import '@fontsource-variable/noto-sans-jp/index.css'
+import '@fontsource/ibm-plex-mono/400.css'
+import '@fontsource/ibm-plex-mono/600.css'
+import './tokens.css'
+import './base.css'
+import './layouts.css'

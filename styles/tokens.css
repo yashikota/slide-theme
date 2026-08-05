@@ -1,0 +1,35 @@
+:root {
+  --color-paper: #f7f8fa;
+  --color-ink: #18212b;
+  --color-muted: #52606d;
+  --color-rule: #c8d1dc;
+  --color-accent: #0959b0;
+
+  --font-sans: "Noto Sans JP Variable", "Noto Sans JP", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --text-display: 4rem;
+  --text-h1: 3rem;
+  --text-h2: 2rem;
+  --text-h3: 1.5rem;
+  --text-body: 1.5rem;
+  --text-small: 1.125rem;
+  --text-caption: 1rem;
+
+  --leading-tight: 1.2;
+  --leading-body: 1.55;
+  --measure-body: 42ch;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+  --space-10: 5rem;
+
+  --slide-padding-block: var(--space-6);
+  --slide-padding-inline: var(--space-10);
+  --grid-gap: var(--space-3);
+  --rule-width: 1px;
+}

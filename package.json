@@ -1,0 +1,35 @@
+{
+  "name": "kota-slide-1",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "keywords": [
+    "slidev-theme",
+    "slidev"
+  ],
+  "engines": {
+    "node": ">=20.12.0"
+  },
+  "scripts": {
+    "build": "slidev build example.md",
+    "dev": "slidev example.md --open",
+    "export": "slidev export example.md",
+    "screenshot": "slidev export example.md --format png",
+    "test": "node --test"
+  },
+  "slidev": {
+    "colorSchema": "light",
+    "defaults": {
+      "aspectRatio": "16/9"
+    }
+  },
+  "dependencies": {
+    "@fontsource-variable/noto-sans-jp": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@slidev/types": "^52.19.0"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.19.0",
+    "playwright-chromium": "^1.62.1"
+  }
+}

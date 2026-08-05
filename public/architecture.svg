@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" role="img" aria-labelledby="title desc">
+  <title id="title">Three-stage request flow</title>
+  <desc id="desc">A client sends a request to an API, which reads from a data store.</desc>
+  <rect width="720" height="480" fill="#f7f8fa"/>
+  <g fill="none" stroke="#18212b" stroke-width="4">
+    <rect x="48" y="176" width="160" height="128"/>
+    <rect x="280" y="176" width="160" height="128"/>
+    <rect x="512" y="176" width="160" height="128"/>
+    <path d="M208 240h64m168 0h64"/>
+  </g>
+  <g fill="#18212b" font-family="sans-serif" font-size="28" text-anchor="middle">
+    <text x="128" y="250">Client</text>
+    <text x="360" y="250">API</text>
+    <text x="592" y="250">Data</text>
+  </g>
+  <g fill="#0959b0">
+    <path d="m272 240-18-12v24z"/>
+    <path d="m504 240-18-12v24z"/>
+  </g>
+</svg>
