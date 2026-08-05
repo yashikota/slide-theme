@@ -1,35 +1,6 @@
-# kota-slide-1
+# slide-theme
 
-日英の技術発表向けに、可読性・理解性・視認性を優先したSlidevテーマです。
-近接、整列、反復、対比を共通ルールにし、意味のない装飾を加えません。
-
-A restrained Slidev theme for readable bilingual technical presentations.
-
-公開 example: https://yashikota.github.io/slide-theme/
-
-## Install
-
-このリポジトリを開発する場合:
-
-```bash
-pnpm install
-pnpm dev
-```
-
-別のSlidevプロジェクトからローカルテーマとして使う場合:
-
-```bash
-pnpm add ../slide-theme
-```
-
-利用側の`slides.md`でテーマを指定します。
-
-```yaml
----
-theme: kota-slide-1
-aspectRatio: 16/9
----
-```
+Slidevレイアウト  
 
 ## Layouts
 
@@ -42,8 +13,6 @@ aspectRatio: 16/9
 - `image-right`: 結論を先に読ませる説明
 - `quote`: 引用と出典
 - `end`: まとめ、質問、終了
-
-名前付きスロットの使い方は[`example.md`](./example.md)を参照してください。
 
 ## Components
 
@@ -71,8 +40,6 @@ aspectRatio: 16/9
 
 ## Writing guide
 
-### 日本語
-
 - 一枚につき主張は一つに絞ります。
 - 本文は一行40字前後を目安にします。
 - 箇条書きは三〜五項目、コードは十数行以内を目安にします。
@@ -83,18 +50,6 @@ aspectRatio: 16/9
 - 箇条書きは並列関係にだけ使います。
 - 主張を上に置き、位置・大きさ・色で読む順序を示します。
 - 英単語が途中で改行されない行長に整えます。
-
-### English
-
-- Keep one claim per slide.
-- Keep body copy near 40–60 characters per line.
-- Prefer three to five bullets and only the code needed for the point.
-- Explain the implication of a figure instead of repeating its labels.
-
-## GitHub Pages
-
-`main`ブランチへのpushで、[`example.md`](./example.md)をGitHub Pagesへ自動デプロイします。
-Actionsの実行後、リポジトリの **Settings → Pages → Build and deployment** でSourceが **GitHub Actions** になっていることを確認してください。
 
 ## Customize
 
@@ -109,11 +64,3 @@ Actionsの実行後、リポジトリの **Settings → Pages → Build and depl
 
 主要なトークンは[`styles/tokens.css`](./styles/tokens.css)にあります。
 
-## Verify
-
-```bash
-pnpm test
-pnpm build
-pnpm export
-pnpm screenshot
-```
