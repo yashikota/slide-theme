@@ -1,6 +1,6 @@
-# slidev-theme-kota
+# slide-theme
 
-研究発表や技術報告向けの [Slidev](https://sli.dev) テーマ。`##` の見出しと本文と読み上げ原稿だけで書いた Markdown を、そのまま発表資料の見た目にする。
+研究発表や技術報告向けの [Slidev](https://sli.dev) テーマ `slidev-theme-kota`。`##` の見出しと本文と読み上げ原稿だけで書いた Markdown を、そのまま発表資料の見た目にする。
 
 - フォントは同梱の UDEV Gothic (SIL OFL 1.1)。Google Fonts を参照しない
 - 本文が収まらないページは文字サイズを自動で縮小する。タイトルの大きさは固定
