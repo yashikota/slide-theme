@@ -16,9 +16,11 @@ const watched = new WeakSet()
 
 onMounted(async () => {
   const page = marker.value.closest('.slidev-page')
-  // Slidev loads the page component asynchronously after the wrapper mounts.
+  if (!page) return
+  // Slidev loads the page component asynchronously after the wrapper mounts, and the wrapper
+  // itself may still be detached when this hook runs; wait for both.
   let layout
-  while (!stopped && page?.isConnected && !(layout = page.querySelector('.slidev-layout'))) {
+  while (!stopped && !(page.isConnected && (layout = page.querySelector('.slidev-layout')))) {
     await new Promise(resolve => requestAnimationFrame(resolve))
   }
   if (!layout || stopped) return

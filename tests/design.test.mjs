@@ -55,6 +55,15 @@ test('slide-bottom layer fits the body, segments Japanese and draws the progress
   assert.match(layer, /data-waitfor="\.kota-fit-ready"/)
 })
 
+test('vite config pre-bundles budoux so the browser build of its DOM helpers is used', async () => {
+  const config = await readThemeFile('vite.config.ts')
+
+  assert.match(config, /optimizeDeps/)
+  assert.match(config, /'slidev-theme-kota > budoux'/)
+  assert.match(config, /'budoux'/)
+  assert.match(config, /cssMinify:\s*false/)
+})
+
 test('cover layout only wraps the slot in the cover class', async () => {
   const cover = await readThemeFile('layouts/cover.vue')
 
