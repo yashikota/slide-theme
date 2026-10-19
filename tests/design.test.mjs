@@ -64,9 +64,15 @@ test('vite config pre-bundles budoux so the browser build of its DOM helpers is 
   assert.match(config, /cssMinify:\s*false/)
 })
 
-test('cover layout only wraps the slot in the cover class', async () => {
+test('cover shows the frontmatter date under the title and pins the rest to the bottom', async () => {
   const cover = await readThemeFile('layouts/cover.vue')
+  const css = await readThemeFile('styles/index.css')
 
   assert.match(cover, /class="slidev-layout cover"/)
   assert.match(cover, /<slot \/>/)
+  assert.match(cover, /\$frontmatter\?\.date/)
+  assert.match(cover, /class="kota-cover-date"/)
+  assert.match(css, /\.slidev-layout\.cover h2\s*\{[^}]*order:\s*0[^}]*margin:\s*auto 0 0/)
+  assert.match(css, /\.slidev-layout\.cover \.kota-cover-date\s*\{[^}]*order:\s*1/)
+  assert.match(css, /\.slidev-layout\.cover h2 \+ p\s*\{[^}]*margin-top:\s*auto/)
 })

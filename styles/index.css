@@ -53,9 +53,16 @@ html, html.dark, body, #app, .slidev-page { background: #fff; }
 .slidev-layout table tbody tr:last-child, .slidev-layout table tbody tr:last-child td { border-bottom: 3px solid var(--kota-rule); }
 .slidev-layout .katex-display { font-size: .95em; margin: 1em 0; }
 .slidev-layout .katex-display > .katex { max-width: 100%; }
-.slidev-layout.cover { display: flex; flex-direction: column; justify-content: center; padding: 70px 90px; background: var(--kota-cover-bg); }
-.slidev-layout.cover h2 { font-size: 70px; line-height: 1.25; border: 0; margin-bottom: 48px; }
-.slidev-layout.cover p { font-size: calc(30px * var(--kota-scale)); color: var(--kota-muted); }
+/* Cover: title in the middle with an accent mark above it, the date right below it,
+   and the remaining paragraphs (presenter, event) pinned to the bottom above a thin rule. */
+.slidev-layout.cover { position: relative; display: flex; flex-direction: column; padding: 64px 96px 60px 112px; background: var(--kota-cover-bg); }
+.slidev-layout.cover::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 16px; background: var(--kota-accent); }
+.slidev-layout.cover > * { order: 2; }
+.slidev-layout.cover h2 { order: 0; margin: auto 0 0; padding: 0; border: 0; font-size: 64px; font-weight: 700; line-height: 1.25; letter-spacing: -.01em; text-wrap: balance; }
+.slidev-layout.cover h2::before { content: ""; display: block; width: 88px; height: 6px; margin-bottom: 36px; background: var(--kota-accent); }
+.slidev-layout.cover .kota-cover-date { order: 1; margin: 28px 0 0; color: var(--kota-accent); font-size: 32px; font-weight: 600; letter-spacing: .02em; }
+.slidev-layout.cover p { margin: .15em 0; font-size: calc(28px * var(--kota-scale)); line-height: 1.5; color: var(--kota-muted); }
+.slidev-layout.cover h2 + p { margin-top: auto; padding-top: 24px; border-top: 2px solid var(--kota-track); }
 
 /* BudouX inserts zero-width spaces into Japanese prose; break only there. */
 .kota-prose { word-break: keep-all; overflow-wrap: anywhere; }
