@@ -52,6 +52,10 @@ html, html.dark, body, #app, .slidev-page { background: #fff; }
 .slidev-layout table thead tr, .slidev-layout table th { border-bottom: 2px solid var(--kota-accent); }
 .slidev-layout table tbody tr:last-child, .slidev-layout table tbody tr:last-child td { border-bottom: 3px solid var(--kota-rule); }
 .slidev-layout .katex-display { font-size: .95em; margin: 1em 0; }
+/* Code blocks: Slidev defaults to 12px; size them close to the body and shrink with it. */
+.slidev-layout { --slidev-code-font-size: calc(24px * var(--kota-scale)); --slidev-code-line-height: 1.5; --slidev-code-padding: 16px 20px; --slidev-code-radius: 6px; }
+.slidev-layout .slidev-code-wrapper { margin-block: .8em; }
+.slidev-layout :not(pre) > code { font-size: .9em; padding: .05em .3em; border-radius: 4px; background: var(--kota-track); }
 .slidev-layout .katex-display > .katex { max-width: 100%; }
 /* Cover: title in the middle with an accent mark above it, the date right below it,
    and the remaining paragraphs (presenter, event) pinned to the bottom above a thin rule. */

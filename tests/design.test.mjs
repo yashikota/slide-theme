@@ -34,6 +34,13 @@ test('body scales with --kota-scale while the title stays fixed', async () => {
   assert.match(css, /\.slidev-layout h2\s*\{[^}]*border-bottom:\s*3px solid var\(--kota-accent\)/)
 })
 
+test('code blocks are sized near the body and shrink with it', async () => {
+  const css = await readThemeFile('styles/index.css')
+
+  assert.match(css, /--slidev-code-font-size:\s*calc\(24px \* var\(--kota-scale\)\)/)
+  assert.match(css, /--slidev-code-line-height:\s*1\.5/)
+})
+
 test('page number and progress bar appear on every slide except the cover', async () => {
   const css = await readThemeFile('styles/index.css')
 
