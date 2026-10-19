@@ -1,119 +1,93 @@
-# kota-slide-1
+# slidev-theme-kota
 
-日英の技術発表向けに、可読性・理解性・視認性を優先したSlidevテーマです。
-近接、整列、反復、対比を共通ルールにし、意味のない装飾を加えません。
+研究進捗報告向けの [Slidev](https://sli.dev) テーマ。`##` の見出しと本文だけで書いた原稿を、そのまま発表資料の見た目にする。
 
-A restrained Slidev theme for readable bilingual technical presentations.
+- フォントは同梱の UDEV Gothic (SIL OFL 1.1)。Google Fonts を参照しない
+- 本文が収まらないページは文字サイズを自動で縮小する。タイトルの大きさは固定
+- 日本語の改行位置は BudouX で決める。数式、コード、図は分割しない
+- 表紙以外にページ番号と、最終ページまでの進み具合を示す下部の進捗バーを表示する
+- 数式は KaTeX (`$...$` / `$$...$$`)
 
 公開 example: https://yashikota.github.io/slide-theme/
 
 ## Install
 
-このリポジトリを開発する場合:
+利用側のプロジェクトに GitHub から追加する。
 
 ```bash
-pnpm install
-pnpm dev
+pnpm add -D github:yashikota/slide-theme
 ```
 
-別のSlidevプロジェクトからローカルテーマとして使う場合:
+更新を固定したい場合はコミットを指定する。
 
 ```bash
-pnpm add ../slide-theme
+pnpm add -D github:yashikota/slide-theme#<commit>
 ```
 
-利用側の`slides.md`でテーマを指定します。
+原稿の frontmatter でテーマを指定する。`lang` は日本語なら `ja`、英語なら `en`。
 
 ```yaml
 ---
-theme: kota-slide-1
-aspectRatio: 16/9
+title: 進捗報告 2026/11/19
+theme: kota
+lang: ja
 ---
 ```
 
-## Layouts
+`colorSchema: light`、`aspectRatio: 16/9`、`canvasWidth: 1280`、フォント設定はテーマの既定値なので書かなくてよい。
 
-- `cover`: タイトル、副題、発表者情報
-- `default`: 見出しと本文の標準形
-- `section`: 濃色背景の章扉
-- `statement`: 一つの結論
-- `two-cols`: 二項比較
-- `image-left`: 図を先に見せる説明
-- `image-right`: 結論を先に読ませる説明
-- `quote`: 引用と出典
-- `end`: まとめ、質問、終了
+## Writing
 
-名前付きスロットの使い方は[`example.md`](./example.md)を参照してください。
+1 ページ目は自動で `cover` レイアウトになり、`##` が大きなタイトル、その下の段落が発表者などの情報になる。2 ページ目以降は `##` がページタイトルで、下線付きで固定表示される。
 
-## Components
+```md
+## 進捗報告<br>2026/11/19
 
-`Callout`は補足と注意だけに使います。
+発表者名
 
-```html
-<Callout type="note">
-補足情報 / Supporting context
-</Callout>
+<!--
+読み上げ原稿は HTML コメントに書く。
+-->
 
-<Callout type="warning">
-見落とすと判断を誤る情報 / Decision-critical caution
-</Callout>
+---
+
+## 前回までの検討
+
+- 検討内容
 ```
 
-`Figure`は代替テキストを必須にし、キャプションを統一します。
-
-```html
-<Figure
-  src="/diagram.svg"
-  alt="処理の流れを示す図"
-  caption="Request flow / リクエストの流れ"
-/>
-```
-
-## Writing guide
-
-### 日本語
-
-- 一枚につき主張は一つに絞ります。
-- 本文は一行40字前後を目安にします。
-- 箇条書きは三〜五項目、コードは十数行以内を目安にします。
-- 図に書いた内容を本文で繰り返さず、意味や判断だけを補います。
-- タイトルは28px、本文は24px、補足は18pxです。
-- 表紙以外にはページ番号を表示します。
-- 一枚を30〜60秒で説明できる情報量にします。
-- 箇条書きは並列関係にだけ使います。
-- 主張を上に置き、位置・大きさ・色で読む順序を示します。
-- 英単語が途中で改行されない行長に整えます。
-
-### English
-
-- Keep one claim per slide.
-- Keep body copy near 40–60 characters per line.
-- Prefer three to five bullets and only the code needed for the point.
-- Explain the implication of a figure instead of repeating its labels.
-
-## GitHub Pages
-
-`main`ブランチへのpushで、[`example.md`](./example.md)をGitHub Pagesへ自動デプロイします。
-Actionsの実行後、リポジトリの **Settings → Pages → Build and deployment** でSourceが **GitHub Actions** になっていることを確認してください。
+Slidev 組み込みのレイアウト (`two-cols`、`image-right`、`center` など) は frontmatter の `layout:` でそのまま使える。
 
 ## Customize
 
-利用側の`style.css`でCSSカスタムプロパティを上書きできます。
-アクセントは一色だけに保ち、本文とのコントラストを確認してください。
+原稿と同じディレクトリの `style.css` で CSS カスタムプロパティを上書きできる。
 
 ```css
 :root {
-  --color-accent: #0959b0;
+  --kota-accent: #0959b0;   /* 見出しの下線、箇条書きの点、進捗バー */
+  --kota-ink: #172033;      /* 本文 */
+  --kota-muted: #566176;    /* 表紙の補足、ページ番号 */
+  --kota-rule: #7a8798;     /* 表の罫線 */
+  --kota-track: #e2e8f0;    /* 進捗バーの背景 */
+  --kota-cover-bg: #f4faf8; /* 表紙の背景 */
 }
 ```
 
-主要なトークンは[`styles/tokens.css`](./styles/tokens.css)にあります。
+主要なスタイルは [`styles/index.css`](./styles/index.css)、自動縮小と BudouX と進捗バーは [`slide-bottom.vue`](./slide-bottom.vue) にある。
 
-## Verify
+## Development
 
 ```bash
-pnpm test
-pnpm build
-pnpm export
-pnpm screenshot
+pnpm install
+pnpm dev        # example.md をプレビュー
+pnpm test       # 構成の検査
+pnpm build      # example.md を dist/ に出力
+pnpm export     # PDF
+pnpm screenshot # PNG
 ```
+
+`main` への push で [`example.md`](./example.md) を GitHub Pages へデプロイする。リポジトリの **Settings → Pages → Build and deployment** で Source を **GitHub Actions** にしておく。
+
+## License
+
+UDEV Gothic は [yuru7/udev-gothic](https://github.com/yuru7/udev-gothic) v2.2.0 を同梱している。ライセンスは [`assets/fonts/LICENSE`](./assets/fonts/LICENSE) を参照。

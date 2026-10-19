@@ -4,32 +4,40 @@ import test from 'node:test'
 
 import { readThemeFile, root } from './theme-files.mjs'
 
-test('package metadata defines a local Slidev theme', async () => {
+test('package metadata defines the kota Slidev theme', async () => {
   const pkg = JSON.parse(await readThemeFile('package.json'))
 
-  assert.equal(pkg.name, 'kota-slide-1')
+  assert.equal(pkg.name, 'slidev-theme-kota')
   assert.equal(pkg.type, 'module')
   assert.deepEqual(pkg.keywords, ['slidev-theme', 'slidev'])
-  assert.equal(pkg.engines.node, '>=20.12.0')
-  assert.equal(pkg.slidev.colorSchema, 'light')
-  assert.equal(pkg.slidev.defaults.aspectRatio, '16/9')
-  assert.deepEqual(Object.keys(pkg.scripts).sort(), [
-    'build',
-    'dev',
-    'export',
-    'screenshot',
-    'test',
-  ])
+  assert.match(pkg.engines.slidev, /^>=53/)
+  assert.deepEqual(Object.keys(pkg.scripts).sort(), ['build', 'dev', 'export', 'screenshot', 'test'])
+  assert.ok(pkg.dependencies.budoux)
 })
 
-test('theme entry points exist', async () => {
+test('theme defaults remove per-deck boilerplate', async () => {
+  const { defaults } = JSON.parse(await readThemeFile('package.json')).slidev
+
+  assert.equal(defaults.colorSchema, 'light')
+  assert.equal(defaults.aspectRatio, '16/9')
+  assert.equal(defaults.canvasWidth, 1280)
+  assert.equal(defaults.fonts.provider, 'none')
+  assert.equal(defaults.fonts.sans, 'UDEV Gothic')
+})
+
+test('theme entry points and bundled fonts exist', async () => {
   const requiredPaths = [
     '.gitignore',
     '.github/workflows/pages.yml',
-    'components',
-    'layouts',
-    'pnpm-workspace.yaml',
+    'layouts/cover.vue',
+    'slide-bottom.vue',
     'styles/index.ts',
+    'styles/index.css',
+    'vite.config.ts',
+    'assets/fonts/UDEVGothic-Regular.ttf',
+    'assets/fonts/UDEVGothic-Bold.ttf',
+    'assets/fonts/LICENSE',
+    'pnpm-workspace.yaml',
   ]
 
   await Promise.all(requiredPaths.map(path => access(new URL(path, root))))
@@ -43,19 +51,4 @@ test('GitHub Pages workflow tests and builds the example with a repository base 
   assert.match(workflow, /slidev build example\.md --base/)
   assert.match(workflow, /github\.event\.repository\.name/)
   assert.match(workflow, /actions\/deploy-pages@v4/)
-})
-
-test('only the required browser exporter may run an install script', async () => {
-  const workspace = await readThemeFile('pnpm-workspace.yaml')
-
-  assert.match(workspace, /allowBuilds:\s*\n\s+playwright-chromium:\s+true/)
-})
-
-test('git ignores generated exports without hiding theme assets', async () => {
-  const gitignore = await readThemeFile('.gitignore')
-
-  assert.match(gitignore, /^\/example-export\/$/m)
-  assert.match(gitignore, /^\/example-export\.pdf$/m)
-  assert.doesNotMatch(gitignore, /^\*\.png$/m)
-  assert.doesNotMatch(gitignore, /^\*\.pdf$/m)
 })

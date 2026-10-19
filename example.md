@@ -1,197 +1,98 @@
 ---
+title: slidev-theme-kota
 theme: ./
-title: Structure guides attention
-layout: cover
-info: |
-  A bilingual example deck for kota-slide-1.
-aspectRatio: 16/9
-drawings:
-  persist: false
+lang: ja
 ---
 
-# Structure guides attention
+## slidev-theme-kota<br>2026/10/19
 
-主張を先に見せ、視線を迷わせない。<br>
-Lead with the claim and guide attention.
+発表者名
 
-::meta::
-
-Kota · 日本語 + English · 2026
-
----
-layout: section
----
-
-# 読ませる順序が、理解を決める
-
-::section::
-
-01 / READING FLOW
+<!--
+このテーマの見た目を確認するためのサンプルです。
+-->
 
 ---
-layout: default
----
 
-# 主張は左上から読み始める
+## テーマの特徴
 
-位置と余白が、情報の読む順序を伝えます。
+- 見出しは `##` で書き、下線付きで固定表示される
+- 本文は収まらない場合に自動で縮小される
+- 日本語の改行位置は BudouX で決める
+- 表紙以外にページ番号と下部の進捗バーを表示する
+- 数式は KaTeX で `$...$` または `$$...$$` と書く
 
-- 主張は上に置く
-- 根拠は主張の下に置く
-- 補足は最後に置く
-
-::label::
-
-PROXIMITY / 近接
-
-::footer::
-
-Four principles of visual design
+<!--
+テーマの特徴を説明します。
+-->
 
 ---
-layout: default
----
 
-# コードは判断に必要な行だけ見せる
+## 表
 
-```ts
-export function parse(input: string): number | null {
-  const value = Number(input)
-  return Number.isFinite(value) ? value : null
-}
-```
+| 手法 | 精度 | 推論時間 |
+|------|------|----------|
+| Baseline | 82.4 | 12 ms |
+| 提案手法 | **91.7** | 15 ms |
+| 提案手法 + 蒸留 | 90.9 | 8 ms |
 
-::label::
+### 参考文献
 
-CODE / 実装例
+Invisibility Cloak, Wang & Zhang, 2025, UIST
 
----
-layout: default
----
-
-# 比較条件を揃えると差が見える
-
-| Method | Latency | Errors |
-| --- | ---: | ---: |
-| Baseline | 248 ms | 12 |
-| Cached | 84 ms | 3 |
-| Batched | 61 ms | 2 |
-
-<Callout type="note">
-単位と評価条件を揃えてから比較します。
-</Callout>
-
-::label::
-
-COMPARISON / 比較
+<!--
+表と参考文献の見た目です。
+-->
 
 ---
-layout: two-cols
----
 
-## Before
+## 数式
 
-- 情報量が多い
-- 視線の起点が曖昧
-- 強調色が競合する
+損失関数は再構成誤差と正則化項の和で定義する。
 
-::right::
+$$
+\mathcal{L} = \sum_{i=1}^{N} \left\| x_i - \hat{x}_i \right\|_2^2 + \lambda \left\| \theta \right\|_2^2
+$$
 
-## After
+<div class="equation-legend">
 
-- 一枚一主張
-- 左上から読む
-- 強調色は一色だけ
+$x_i$ は入力、$\hat{x}_i$ は再構成、$\lambda$ は正則化の強さ、$\theta$ はモデルのパラメータ。
 
-::title::
+</div>
 
-# 対比は同じ軸で左右に並べる
-
-::footer::
-
-CONTRAST / 対比
+<!--
+数式と凡例の見た目です。
+-->
 
 ---
-layout: image-left
----
 
-# 処理の順序は図から読み取れる
+## 長文の自動縮小
 
-左から右へ進む図は、手順の説明に向きます。
+- 本文が 1 ページに収まらない場合、タイトルの大きさはそのままに本文だけが縮小される
+- 縮小率は二分探索で決め、数式や表、画像もページの内側に収まるようにする
+- 文字数が多いときに手動で文字サイズを調整する必要はない。ただし 1 ページの情報量が多すぎる場合はページを分けたほうが読みやすい
+- 日本語の文は BudouX によって文節の区切りで折り返されるので、助詞の直後や単語の途中で改行されない
+- 英数字と日本語が混在する行でも同じ規則で折り返される。長い URL やコードは分割せず、はみ出す場合は縮小で対応する
+- 箇条書きの入れ子にも同じ縮小が適用される
+  - 入れ子の項目
+  - もう 1 つの項目
+- 表や数式が混在するページでも、はみ出す要素がなくなるまで同じ比率で縮小される
+- 画像は幅ではなく下端がページの内側に収まるかで判定される
+- 縮小率はページごとに独立しているので、他のページの文字サイズには影響しない
+- このページは縮小が働くことを確認するために、意図的に行数を多くしている
+- 最後の項目まで表示されていれば、縮小は正しく動作している
 
-1. Client sends a request
-2. API validates the input
-3. Data store returns a result
-
-::image::
-
-<Figure
-  src="/architecture.svg"
-  alt="Client、API、Dataの順に進む三段階のリクエストフロー"
-  caption="Request flow / リクエストの流れ"
-/>
-
----
-layout: image-right
----
-
-# 結論を先に示すと図の意味が決まる
-
-本文を左に置き、判断してから図を確認します。
-
-<Callout type="warning" label="注意">
-図ではなく、意味を伝えます。
-</Callout>
-
-::image::
-
-<Figure
-  src="/architecture.svg"
-  alt="ClientからAPIを経由してDataへ到達する処理フロー"
-  caption="The same system, a different reading order"
-/>
+<!--
+行数が多いページでの自動縮小の見た目です。
+-->
 
 ---
-layout: quote
----
 
-秩序は、装飾ではなく理解のためにつくる。
+## まとめ
 
-::attribution::
+- `theme: kota` を指定すれば、この見た目で資料を作れる
+- 色は `style.css` で `--kota-accent` などを上書きして変更できる
 
-Design principle / 設計原則
-
----
-layout: statement
----
-
-# 色は意味の差にだけ使う。
-
-::source::
-
-強調色は一色に絞る。
-
----
-layout: default
----
-
-# 一枚は30〜60秒で伝える
-
-- 本文は短い文にする
-- 箇条書きは並列関係に限る
-
-::label::
-
-WRITING / 執筆
-
----
-layout: end
----
-
-# 主張を上に置けば、視線は迷わない。
-
-短く、揃えて、意味だけを強調する。
-
-::meta::
-
-Questions / 質問
+<!--
+以上になります。ありがとうございました。
+-->

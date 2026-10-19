@@ -1,6 +1,3 @@
-import '@fontsource-variable/noto-sans-jp/index.css'
-import '@fontsource/ibm-plex-mono/400.css'
-import '@fontsource/ibm-plex-mono/600.css'
-import './tokens.css'
-import './base.css'
-import './layouts.css'
+// Self-contained: the few base rules Slidev's default stylesheet would add are written out in
+// index.css without @apply, so the theme never depends on UnoCSS injection order.
+import './index.css'

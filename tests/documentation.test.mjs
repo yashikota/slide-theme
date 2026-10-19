@@ -1,40 +1,28 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { layoutNames, readThemeFile } from './theme-files.mjs'
+import { readThemeFile } from './theme-files.mjs'
 
-test('example deck exercises every layout and component', async () => {
+test('example deck exercises cover, table, math, references and auto fit', async () => {
   const example = await readThemeFile('example.md')
 
-  assert.match(example, /^---\n[\s\S]*?layout:\s*cover\n[\s\S]*?---\n\n#/)
-  assert.doesNotMatch(example, /^---[\s\S]*?---\n\n---\nlayout:\s*cover/)
-  assert.match(
-    example,
-    /layout:\s*default\n---\n\n# [^\n]+[\s\S]*?::label::/,
-  )
-  assert.match(
-    example,
-    /layout:\s*image-left\n---\n\n# [^\n]+[\s\S]*?::image::/,
-  )
-  for (const layout of layoutNames)
-    assert.match(example, new RegExp(`layout:\\s*${layout}`))
-  assert.match(example, /<Callout/)
-  assert.match(example, /<Figure/)
-  assert.match(example, /```ts/)
+  assert.match(example, /^---\n[\s\S]*?theme:\s*\.\/\n[\s\S]*?---\n\n## /)
   assert.match(example, /\|.+\|/)
-  assert.match(example, /日本語/)
-  assert.match(example, /English/)
+  assert.match(example, /\$\$/)
+  assert.match(example, /### 参考文献/)
+  assert.match(example, /equation-legend/)
+  assert.match(example, /以上になります。ありがとうございました。/)
+  for (const slide of example.split(/^---$/m).slice(2))
+    assert.match(slide, /<!--[\s\S]*?-->/, 'every slide carries a speaker note')
 })
 
-test('README explains installation, layout choice, density, and theming', async () => {
+test('README explains installation, frontmatter, customization and the font license', async () => {
   const readme = await readThemeFile('README.md')
 
-  assert.match(readme, /pnpm/)
-  assert.match(readme, /theme:\s*kota-slide-1/)
-  assert.match(readme, /cover/)
-  assert.match(readme, /two-cols/)
-  assert.match(readme, /40/)
-  assert.match(readme, /--color-accent/)
-  assert.match(readme, /日本語/)
-  assert.match(readme, /English/)
+  assert.match(readme, /pnpm add -D github:yashikota\/slide-theme/)
+  assert.match(readme, /theme:\s*kota/)
+  assert.match(readme, /--kota-accent/)
+  assert.match(readme, /style\.css/)
+  assert.match(readme, /BudouX/)
+  assert.match(readme, /assets\/fonts\/LICENSE/)
 })

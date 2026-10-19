@@ -1,14 +1,18 @@
 {
-  "name": "kota-slide-1",
-  "version": "0.1.0",
+  "name": "slidev-theme-kota",
+  "version": "1.0.0",
+  "description": "研究進捗報告向けの Slidev テーマ。UDEV Gothic、本文の自動縮小、BudouX の日本語改行、ページ番号と進捗バーを備える。",
   "private": true,
   "type": "module",
+  "repository": "github:yashikota/slide-theme",
   "keywords": [
     "slidev-theme",
     "slidev"
   ],
+  "packageManager": "pnpm@11.20.0",
   "engines": {
-    "node": ">=20.12.0"
+    "node": ">=22.12.0",
+    "slidev": ">=53.0.0"
   },
   "scripts": {
     "build": "slidev build example.md",
@@ -18,18 +22,22 @@
     "test": "node --test"
   },
   "slidev": {
-    "colorSchema": "light",
     "defaults": {
-      "aspectRatio": "16/9"
+      "colorSchema": "light",
+      "aspectRatio": "16/9",
+      "canvasWidth": 1280,
+      "fonts": {
+        "provider": "none",
+        "sans": "UDEV Gothic",
+        "mono": "UDEV Gothic"
+      }
     }
   },
   "dependencies": {
-    "@fontsource-variable/noto-sans-jp": "^5.3.0",
-    "@fontsource/ibm-plex-mono": "^5.3.0",
-    "@slidev/types": "^52.19.0"
+    "budoux": "0.9.3"
   },
   "devDependencies": {
-    "@slidev/cli": "^52.19.0",
-    "playwright-chromium": "^1.62.1"
+    "@slidev/cli": "53.0.0",
+    "playwright-chromium": "1.64.0"
   }
 }
